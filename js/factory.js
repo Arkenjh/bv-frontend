@@ -4,18 +4,19 @@ materialAdmin
     // Factory
     // =========================================================================
 
-    .factory('Stores', function($resource) {
-        return $resource('//127.0.0.1:8000/stores/stores/:id');
+    .factory('Stores', function($resource, API) {
+        return $resource(API+'/stores/stores/:id');
     })
     
-    .factory('Reports', function($resource) {
-        return $resource('//127.0.0.1:8000/reports/reports/:id');
+    .factory('Reports', function($resource, API) {
+        return $resource(API+'/reports/reports/:id');
     })
 
     .factory('authInterceptor', function(API, authService) {
 		return {
 			// automatically attach Authorization header
 			request: function(config) {
+				console.log('authInterceptor')
 				var token = authService.getToken();
 				if(config.url.indexOf(API) === 0 && token) {
 					config.headers.Authorization = 'JWT ' + token;
@@ -38,3 +39,7 @@ materialAdmin
 			},
 		}
 	})
+
+	.config(function($httpProvider) {
+		$httpProvider.interceptors.push('authInterceptor');
+	})	

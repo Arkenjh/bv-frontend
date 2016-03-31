@@ -9,7 +9,7 @@
         
         <!-- Login -->
         <div class="lc-block" id="l-login" data-ng-class="{ 'toggled': lctrl.login === 1 }" data-ng-if="lctrl.login === 1">
-            <form role="form" ng-submit="log_in(loginForm)" name="loginForm" novalidate>
+            <form role="form" ng-submit="lctrl.log_in(loginForm)" name="loginForm" novalidate>
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                 <div class="fg-line">
@@ -34,8 +34,8 @@
                 </label>
             </div>
 
-            <a href="" class="btn btn-login btn-danger btn-float" ng-click="log_in(loginForm)"><i class="zmdi zmdi-arrow-forward"></i></a>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.log_in(loginForm)"><i class="zmdi zmdi-arrow-forward"></i></a>
+            
 
             <ul class="login-navigation">
                 <li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.login = 0; lctrl.register = 1">Register</li>

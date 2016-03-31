@@ -11,6 +11,3 @@ var materialAdmin = angular.module('materialAdmin', [
 ])
 .constant('API_SERVER', 'http://127.0.0.1:8000/api/')
 .constant('API', 'http://127.0.0.1:8000')
-.config(function($httpProvider) {
-  $httpProvider.interceptors.push('authInterceptor');
-})

@@ -288,59 +288,6 @@ materialAdmin
         return gs;
     })
 
-    .factory('Auth', function($http, $cookieStore){
-
-        var accessLevels = routingConfig.accessLevels
-            , userRoles = routingConfig.userRoles
-            , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
-
-        $cookieStore.remove('user');
-
-        function changeUser(user) {
-            angular.extend(currentUser, user);
-        }
-
-        return {
-            authorize: function(accessLevel, role) {
-                if(role === undefined) {
-                    role = currentUser.role;
-                }
-
-                return accessLevel.bitMask & role.bitMask;
-            },
-            isLoggedIn: function(user) {
-                if(user === undefined) {
-                    user = currentUser;
-                }
-                return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
-            },
-            register: function(user, success, error) {
-                $http.post('/register', user).success(function(res) {
-                    changeUser(res);
-                    success();
-                }).error(error);
-            },
-            login: function(user, success, error) {
-                $http.post('/login', user).success(function(user){
-                    changeUser(user);
-                    success(user);
-                }).error(error);
-            },
-            logout: function(success, error) {
-                $http.post('/logout').success(function(){
-                    changeUser({
-                        username: '',
-                        role: userRoles.public
-                    });
-                    success();
-                }).error(error);
-            },
-            accessLevels: accessLevels,
-            userRoles: userRoles,
-            user: currentUser
-        };
-    })
-
     .factory('authService', function($window){
         var self = this;
 
@@ -353,6 +300,7 @@ materialAdmin
 
         function saveToken(token) {
             $window.localStorage['jwtToken'] = token;
+            console.log('JWT:', token);
         };
 
         function getToken() {
@@ -363,6 +311,9 @@ materialAdmin
             getToken: function() {
                 return $window.localStorage['jwtToken'];
             },
+            saveToken: function(token) {
+                $window.localStorage['jwtToken'] = token;
+            },            
             isAuthed: function() {
                 var token = getToken();
                 if(token) {
@@ -381,38 +332,7 @@ materialAdmin
         return myObject;      
     })
 
-    .factory('authServiceOld', function($window){
-        var self = this;
 
-        // Add JWT methods here
-        self.parseJwt = function(token) {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse($window.atob(base64));
-        }
-
-        self.saveToken = function(token) {
-            $window.localStorage['jwtToken'] = token;
-        }
-
-        self.getToken = function() {
-            return $window.localStorage['jwtToken'];
-        }
-
-        self.isAuthed = function() {
-            var token = self.getToken();
-            if(token) {
-                var params = self.parseJwt(token);
-                return Math.round(new Date().getTime() / 1000) <= params.exp;
-            } else {
-                return false;
-            }
-        }
-
-        self.logout = function() {
-            $window.localStorage.removeItem('jwtToken');
-        }      
-    })
 
     .factory('userService', function($http, API, authService){
         var self = this;

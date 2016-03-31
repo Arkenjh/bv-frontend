@@ -1,4 +1,4 @@
-<div class="container" data-ng-controller="tableCtrl as tctrl">
+<div class="container" data-ng-controller="TestController">
 
     <div class="block-header">
         <h2>Data Tables<small>ng-table is a powerfull AngularJs ready Data Table with tons of customizable options. Read more for detailed documentation and HowTos...</small></h2>
@@ -23,16 +23,6 @@
             </li>
         </ul>
     </div>
-
-    <div class="card">
-        <div class="card-header">
-            <h2>Basic Examples <small>With lease settings enabled.</small></h2>
-        </div>
-                
-        <div class="card-body" data-ng-controller="TestController">
-            <p>{{ store }}</p>
-        </div>
-    </div>
     
     <div class="card">
         <div class="card-header">
@@ -41,22 +31,22 @@
                 
         <div class="card-body">
             <div class="table-responsive">
-                <table ng-table="tctrl.tableBasic" class="table table-striped table-vmiddle">
-                    <tr ng-repeat="w in $data">
+                <table ng-table="tableBasic" class="table table-striped table-vmiddle">
+                    <tr ng-repeat="report in data">
                         <td data-title="'ID'">
-                            {{ w.id }}
+                            {{ report.id }}
                         </td>
                         <td data-title="'Name'">
-                            {{ w.name }}
+                            {{ report.qty_inkjet_1 }}
                         </td>
                         <td data-title="'Email'">
-                            {{ w.email }}
+                            {{ report.qty_inkjet_2 }}
                         </td>
                         <td data-title="'Username'">
-                            {{ w.username }}
+                            {{ report.qty_laser_1 }}
                         </td>
                         <td data-title="'Contact'">
-                            {{ w.contact }}
+                            {{ report.qty_laser_2 }}
                         </td>
                     </tr>
                 </table>

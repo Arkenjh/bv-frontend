@@ -1,15 +1,11 @@
 materialAdmin
 
-    .controller('TestController',function($scope, Stores, Reports) {
+    .controller('TestController', ['$scope', 'ngTableParams', 'Stores', 'Reports', function($scope, ngTableParams, Stores, Reports) {
         $scope.id = 1
 
-        $scope.store = Stores.get({ id: $scope.id }, function() {
-            console.log(store);
-        }); // get() returns a single store
+        //$scope.store = Reports.get({ id: $scope.id }, function() {}); // get() returns a single store
 
-        $scope.stores = Stores.query(function() {
-            console.log(stores);
-        }); //query() returns all the stores
+        //$scope.stores = Reports.query(function() {}); //query() returns all the stores
 
         $scope.postData = {};
         $scope.newReport = function() {
@@ -17,10 +13,26 @@ materialAdmin
             report.save();
         }
 
-    })
+        var data = Reports.query();
+        
+        //Basic Example
+        $scope.tableBasic = new ngTableParams({
+            page: 1,            // show first page
+            count: 10           // count per page
+        }, {
+            total: data.length, // length of data
+            getData: function ($defer, params) {
+                console.log('getData')
+                $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            }
+        })
+
+        $scope.data = data     
+
+    }])
 
 
-    .controller('JwtCtrl',function($scope, $location, userService, authService, Stores) {
+    .controller('JwtCtrl',function($scope, $location, userService, authService, Stores, Validate) {
 
         var self = this;
         this.login = 1;
@@ -40,7 +52,13 @@ materialAdmin
             Validate.form_validation(formData,$scope.errors);
             if(!formData.$invalid){            
             userService.login($scope.model.username, $scope.model.password)
-                .then(handleRequest, handleRequest)
+                .then(function(data){
+                // success case
+                  $location.path("/pages/profile");
+                },function(data){
+                // error case
+                  $scope.errors = data;
+                });
             }
         }
         self.register = function() {
