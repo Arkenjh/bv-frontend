@@ -1,0 +1,132 @@
+<div class="container">
+    <div class="block-header">
+        <h2>CLIENTS | Add</h2>
+
+        <ul class="actions">
+            <li>
+                <a href="">
+                    <i class="zmdi zmdi-trending-up"></i>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="zmdi zmdi-check-all"></i>
+                </a>
+            </li>
+            <li class="dropdown" uib-dropdown>
+                <a href="" uib-dropdown-toggle>
+                    <i class="zmdi zmdi-more-vert"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">Refresh</a>
+                    </li>
+                    <li>
+                        <a href="">Manage Widgets</a>
+                    </li>
+                    <li>
+                        <a href="">Widgets Settings</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="card" data-ng-controller="CustomersCtrl">
+        <div class="card-header">
+            <h2>Nouveau client</h2>
+        </div>
+
+                     
+
+        <div class="card-body card-padding">
+            <form role="form" name="CustomerForm" ng-submit="add(CustomerForm)">
+                <div class="row">
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Nom</label>
+                            <input type="text" class="form-control" placeholder="Hubert" ng-model="model.lastname">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Prénom</label>
+                            <input type="text" class="form-control" placeholder="Pascal" ng-model="model.firstname">
+                        </div>
+                    </div>
+                    <div class="col-sm-1 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Pro</label>
+                            <div class="checkbox m-b-15">
+                                <label>
+                                    <input ng-model="model.professional" type="checkbox" value="">
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>                            
+                        </div>
+                      
+                    </div>
+                    <div class="col-sm-5 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Raison sociale</label>
+                            <input type="text" class="form-control" placeholder="SARL ..." ng-model="model.corporate_name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Tél #1</label>
+                            <input type="text" class="form-control" placeholder="0149......" ng-model="model.phone_1">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Tél #2</label>
+                            <input type="text" class="form-control" placeholder="0150......" ng-model="model.phone_2">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Email</label>
+                            <input type="text" class="form-control" placeholder="...@..." ng-model="model.email">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Adresse</label>
+                            <input type="text" class="form-control" placeholder="10 Rue ..." ng-model="model.address">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Code postal</label>
+                            <input type="text" class="form-control" placeholder="75000" ng-model="model.zipcode">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Ville</label>
+                            <input type="text" class="form-control" placeholder="Paris" ng-model="model.town">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Pays</label>
+                            <input type="text" class="form-control" placeholder="FRANCE" ng-model="model.country">
+                        </div>
+                    </div>                                         
+                </div>                             
+                <button type="submit" ng-submit="add(CustomerForm)" class="btn btn-primary btn-sm m-t-10">Valider</button>
+            </form>
+        </div>
+    </div>
+
+</div>

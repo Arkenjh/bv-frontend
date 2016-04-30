@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="block-header">
+        <h2>Reports | Add</h2>
+
+        <ul class="actions">
+            <li>
+                <a href="">
+                    <i class="zmdi zmdi-trending-up"></i>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="zmdi zmdi-check-all"></i>
+                </a>
+            </li>
+            <li class="dropdown" uib-dropdown>
+                <a href="" uib-dropdown-toggle>
+                    <i class="zmdi zmdi-more-vert"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">Refresh</a>
+                    </li>
+                    <li>
+                        <a href="">Manage Widgets</a>
+                    </li>
+                    <li>
+                        <a href="">Widgets Settings</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="card" data-ng-controller="ReportCtrl">
+        <div class="card-header">
+            <h2>Add new report <small>An inputmask helps the user with the input by ensuring a predefined format. This can be useful for dates, numerics, phone numbers etc...</small></h2>
+        </div>
+
+                     
+
+        <div class="card-body card-padding">
+            <form role="form" name="ReportForm" ng-submit="add(ReportForm)">
+                <div class="row">
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>JE 1</label>
+                            <input type="text" class="form-control" placeholder="eg: 10" ng-model="model.qty_inkjet_1">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>JE 2</label>
+                            <input type="text" class="form-control" placeholder="eg: 100"  ng-model="model.qty_inkjet_2">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>LA 1</label>
+                            <input type="text" class="form-control" placeholder="eg: 10" ng-model="model.qty_laser_1">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>LA 2</label>
+                            <input type="text" class="form-control" placeholder="eg: 100" ng-model="model.qty_laser_2">
+                        </div>
+                    </div>
+                </div>            
+                <div class="row">
+                    <div class="col-sm-3 m-b-20">
+                        <div class="form-group fg-line">
+                            <label>Date</label>
+                            <input type="text" class="form-control" placeholder="eg: 23/05/2016" ng-model="model.date">
+                            <!--
+                            <div class="date-picker dp-blue">
+                                <uib-datepicker show-weeks="false" ng-model="model.date" min-date="minDate" class="dp-inline"></uib-datepicker>
+                            </div>
+                            <button class="btn btn-info" data-swal-basic>Click me</button>
+                            -->
+                        </div>
+
+                    </div>
+                    <div class="col-sm-3 m-b-15">
+                        <p class="f-500 m-b-15">Workers</p>
+                        <select chosen multiple data-placeholder="Select a worker..." class="w-100"  ng-model="model.workers_list" ng-options="worker.id as worker.name for worker in workers">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 m-b-15">
+                        <p class="f-500 m-b-20">Comment</p>
+
+                        <div class="form-group">
+                            <div class="fg-line">
+                                <textarea  ng-model="model.comment" class="form-control" rows="5" placeholder="Let us type some lorem ipsum...."></textarea>
+                            </div>
+                        </div>
+                    </div>                                
+                </div>
+                <button type="submit" ng-submit="add(ReportForm)" class="btn btn-primary btn-sm m-t-10">Submit</button>
+                <p>{{ workers }}</p>
+            </form>
+        </div>
+    </div>
+
+</div>

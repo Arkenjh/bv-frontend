@@ -4,6 +4,10 @@ materialAdmin
     // Factory
     // =========================================================================
 
+    .factory('Workers', function($resource, API) {
+        return $resource(API+'/workers/myworkers/:id');
+    })
+
     .factory('Stores', function($resource, API) {
         return $resource(API+'/stores/stores/:id');
     })
@@ -12,14 +16,28 @@ materialAdmin
         return $resource(API+'/reports/reports/:id');
     })
 
-    .factory('authInterceptor', function(API, authService) {
+    .factory('Customers', function($resource, API) {
+        return $resource(API+'/customers/customers/:id');
+    })
+    
+    .factory('authInterceptor', function(API, authService, $location) {
 		return {
 			// automatically attach Authorization header
 			request: function(config) {
-				console.log('authInterceptor')
-				var token = authService.getToken();
-				if(config.url.indexOf(API) === 0 && token) {
-					config.headers.Authorization = 'JWT ' + token;
+				console.log('authInterceptor | request');
+
+
+				if(authService.isAuthed()) {
+
+					var token = authService.getToken();
+					authService.refresh(token);
+
+					if(config.url.indexOf(API) === 0 && token) {
+						config.headers.Authorization = 'JWT ' + token;
+					}
+				} else {
+					console.log('not loged | redirect to login page');
+					$location.path("/login");
 				}
 					return config;
 			},
@@ -32,7 +50,8 @@ materialAdmin
 			},
 			responseError: function(res) {
 				if (res.status === 403) {
-					console.log('XXX 401...');
+					console.log('ERROR 403 | redirect to login page');
+					$location.path("/login");
 					return res;
 				}
 				return res;

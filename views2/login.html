@@ -1,11 +1,15 @@
     
+        <!-- CSS -->
+        <link href="css/app.min.1.css" rel="stylesheet">
+        <link href="css/app.min.2.css" rel="stylesheet">
+
 <section id="main">
     <aside id="sidebar" data-ng-include src="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
 
     <aside id="chat" data-ng-include src="'template/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
 
     <section id="content" class="page-view" data-ui-view>
-    <div data-ng-controller="JwtCtrl as lctrl">
+    <div class="login-content" data-ng-controller="JwtCtrl as lctrl">
         
         <!-- Login -->
         <div class="lc-block" id="l-login" data-ng-class="{ 'toggled': lctrl.login === 1 }" data-ng-if="lctrl.login === 1">

@@ -1,0 +1,67 @@
+<div class="container" data-ng-controller="TestController">
+
+    <div class="block-header">
+        <h2>Reports<small>ng-table is a powerfull AngularJs ready Data Table with tons of customizable options. Read more for detailed documentation and HowTos...</small></h2>
+
+        <ul class="actions m-t-20 hidden-xs">
+            <li class="dropdown" uib-dropdown>
+                <a href="" uib-dropdown-toggle>
+                    <i class="zmdi zmdi-more-vert"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">Privacy Settings</a>
+                    </li>
+                    <li>
+                        <a href="">Account Settings</a>
+                    </li>
+                    <li>
+                        <a href="">Other Settings</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            <h2>Rapports <small>liste des enregistrements disponibles</small></h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table ng-table="tableBasic" class="table table-striped table-vmiddle">
+                    <tr ng-repeat="report in data">
+                        <td data-title="'date'">
+                            {{ report.date | date : 'dd/MM/yyyy' }}
+                        </td>
+                        <td data-title="'JE | ratio'">
+                            {{ report.inkjet_ratio | number:1 }}%
+                        </td>
+                        <td data-title="'JE | total'">
+                            {{ report.total_inkjet }}
+                        </td>                        
+                        <td data-title="'LA | ratio'">
+                            {{ report.laser_ratio | number:1 }}%
+                        </td>
+                        <td data-title="'LA | total'">
+                            {{ report.total_laser }}
+                        </td> 
+                        <td data-title="'Total'">
+                            {{ report.total }}
+                        </td>                                                 
+                        <td data-title="'Comment'">
+                            {{ report.comment }}
+                        </td>
+                        <td data-title="'Workers'">
+                            <span ng-repeat="worker in report.workers" class="badge">{{ worker.name }}</span>
+                        </td>                        
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+          
+</div>
+
+

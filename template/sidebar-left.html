@@ -31,15 +31,31 @@
     <ul class="main-menu">
         
         <li data-ui-sref-active="active">
-            <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-home"></i> Home</a>
-        </li>
-        
-        <li data-ui-sref-active="active">
-            <a data-ui-sref="news.reports" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-view-list"></i> Reports</a>
+            <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-home"></i> Tableau de bord</a>
         </li>
 
+        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('reports') }">
+            <a href="" toggle-submenu><i class="zmdi zmdi-assignment"></i> Relevés</a>
+            <ul>
+                <li><a data-ui-sref-active="active" data-ui-sref="reports.add" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-account-add"></i> Nouveau rapport</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="reports.list" data-ng-click="mactrl.sidebarStat($event)">Historique</a></li>
+            </ul>
+        </li>
+
+
+        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('customers') }">
+            <a href="" toggle-submenu><i class="zmdi zmdi-accounts"></i> Clients</a>
+            <ul>
+                <li><a data-ui-sref-active="active" data-ui-sref="customers.add" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-account-add"></i> Nouveau client</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="customers.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-accounts-list"></i> Recherche</a></li>
+            </ul>
+        </li>
+
+
+
+
         <li data-ui-sref-active="active">
-            <a data-ui-sref="news.pricing" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-shopping-cart"></i> Pricing</a>
+            <a data-ui-sref="news.pricing" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-shopping-cart"></i> Tarifs</a>
         </li>
 
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('pages') }">

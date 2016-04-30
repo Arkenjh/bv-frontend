@@ -313,12 +313,27 @@ materialAdmin
             },
             saveToken: function(token) {
                 $window.localStorage['jwtToken'] = token;
-            },            
+            },
+            refresh: function(token) {
+                var params = parseJwt(token);
+                t = params.exp - Math.round(new Date().getTime() / 1000);
+                console.log(t+'s');
+
+                if (t < 60 && t > 0) {
+                    //var new_token = $http.post(API + '/api-token-refresh/', { token: token });
+                    //saveToken(new_token);
+                    console.log('refresh token now');
+                } else {
+                    console.log('refresh | nothing to do');
+                }
+            },         
             isAuthed: function() {
                 var token = getToken();
                 if(token) {
                     var params = parseJwt(token);
-                    return Math.round(new Date().getTime() / 1000) <= params.exp;
+                    var authed = Math.round(new Date().getTime() / 1000) <= params.exp;
+                    console.log(params.exp);
+                    return authed
                 } else {
                     return false;
                 }
@@ -352,6 +367,9 @@ materialAdmin
                     username: username,
                     password: password
                 })
+            }, 
+            refresh: function(token) {
+                return $http.post(API + '/api-token-refresh/', { token: token });
             }
         }
     })
